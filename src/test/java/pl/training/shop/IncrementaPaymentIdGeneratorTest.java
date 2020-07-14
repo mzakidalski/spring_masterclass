@@ -3,6 +3,7 @@ package pl.training.shop;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pl.training.shop.payments.IncrementaPaymentIdGenerator;
 
 import static java.lang.Long.parseLong;
 import static org.junit.jupiter.api.Assertions.*;
