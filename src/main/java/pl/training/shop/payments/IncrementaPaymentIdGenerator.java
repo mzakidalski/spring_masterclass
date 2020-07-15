@@ -1,4 +1,4 @@
-package pl.training.shop;
+package pl.training.shop.payments;
 
 import lombok.Setter;
 import org.springframework.stereotype.Service;
