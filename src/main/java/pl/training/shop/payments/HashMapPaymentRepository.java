@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository("paymentRepository")
 @Log
 public class HashMapPaymentRepository implements  PaymentRepository {
 
