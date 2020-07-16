@@ -1,9 +1,11 @@
 package pl.training.shop.products;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.training.shop.common.PagedResult;
 
 @RequiredArgsConstructor
+@Service
 public class ProductService {
 
     private final ProductRepository productRepository;

@@ -1,18 +1,13 @@
 package pl.training.shop.payments;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.time.Instant;
 
 @Log
-@RequiredArgsConstructor
+@Service
 public class FakePaymentService implements PaymentService {
 
     private static final String LOG_FORMAT = "A new payment of %s has been initiated.";
@@ -20,6 +15,11 @@ public class FakePaymentService implements PaymentService {
     private final PaymentIdGenerator paymentIdGenerator;
     private final PaymentRepository repository;
 
+    public FakePaymentService(@IdGenerator("incrementalPaymentIdGenerator") PaymentIdGenerator paymentIdGenerator,
+                              PaymentRepository repository) {
+        this.paymentIdGenerator = paymentIdGenerator;
+        this.repository = repository;
+    }
 
     @Override
     public Payment process(PaymentRequest paymentRequest) {
