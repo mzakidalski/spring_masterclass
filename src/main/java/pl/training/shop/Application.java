@@ -41,7 +41,7 @@ public class Application {
             var order = new Order(List.of(VIDEO_PRODUCT, BOOK_PRODUCT));
             shopService.placeOrder(order);
             var payment = shopService.payForOrder(order.getId());
-            log.info(payment.getId());
+            log.info(payment.toString());
         }
     }
     }
