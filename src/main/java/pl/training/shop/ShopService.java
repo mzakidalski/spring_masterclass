@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import pl.training.shop.common.PagedResult;
 import pl.training.shop.orders.Order;
 import pl.training.shop.orders.OrderService;
+import pl.training.shop.payments.LogPayments;
 import pl.training.shop.payments.Payment;
 import pl.training.shop.payments.PaymentRequest;
 import pl.training.shop.payments.PaymentService;
@@ -29,6 +30,7 @@ public class ShopService {
         return orderService.add(order);
     }
 
+    @LogPayments
     public Payment payForOrder(long orderId) {
         var order = orderService.getBy(orderId);
         var paymentRequest = PaymentRequest.builder()
