@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.training.shop.payments.IdGenerator;
 import pl.training.shop.payments.PaymentIdGenerator;
 
-@Service
-public class IncrementalPaymentIdGenerator implements PaymentIdGenerator {
+public class IncrementaPaymentIdGenerator implements PaymentIdGenerator {
 
     public static final String ID_FORMAT = "%010d";
 

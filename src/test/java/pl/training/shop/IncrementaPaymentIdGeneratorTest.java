@@ -3,16 +3,16 @@ package pl.training.shop;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pl.training.shop.payments.IncrementalPaymentIdGenerator;
+import pl.training.shop.payments.IncrementaPaymentIdGenerator;
 
 import static java.lang.Long.parseLong;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class IncrementalPaymentIdGeneratorTest {
+public class IncrementaPaymentIdGeneratorTest {
 
     private static final String ID_FORMAT = "\\d{10}";
 
-    private final IncrementalPaymentIdGenerator paymentIdGenerator = new IncrementalPaymentIdGenerator();
+    private final IncrementaPaymentIdGenerator paymentIdGenerator = new IncrementaPaymentIdGenerator();
 
     @DisplayName("Should generate valid id")
     @Test
@@ -26,7 +26,7 @@ public class IncrementalPaymentIdGeneratorTest {
     void shouldGenerateIdByIncrementingValueOfPreviousOne() {
         long firstIdValue = parseLong(paymentIdGenerator.getNext());
         long secondValue = parseLong(paymentIdGenerator.getNext());
-        assertEquals(1L, (secondValue - firstIdValue));
+        assertTrue((secondValue - firstIdValue) == 1L);
     }
 
 }
