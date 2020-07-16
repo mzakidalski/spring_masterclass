@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.AdditionalAnswers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -29,16 +30,15 @@ class FakePaymentServiceTest {
 
     @Mock
     private PaymentIdGenerator paymentIdGenerator;
+    @Mock
+    private ApplicationEventPublisher eventPublisher;
     private Payment payment;
 
     @BeforeEach
     void setUp() {
         when(repository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg());
         when(paymentIdGenerator.getNext()).thenReturn(PAYMENT_ID);
-        FakePaymentService fakePaymentService = new FakePaymentService(paymentIdGenerator, repository);
-//        fakePaymentService.setPaymentIdGenerator(paymentIdGenerator);
-//        fakePaymentService.setRepository(repository);
-
+        FakePaymentService fakePaymentService = new FakePaymentService(paymentIdGenerator, repository, eventPublisher);
         payment = fakePaymentService.process(PAYMENT_REQUEST);
     }
 

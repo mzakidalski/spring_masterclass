@@ -2,6 +2,7 @@ package pl.training.shop.payments;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.Instant;
 
@@ -13,6 +14,8 @@ public class FakePaymentService implements PaymentService {
 
     private final PaymentIdGenerator paymentIdGenerator;
     private final PaymentRepository repository;
+    private final ApplicationEventPublisher publisher;
+
 
 
     @Override
@@ -24,6 +27,7 @@ public class FakePaymentService implements PaymentService {
                 .status(PaymentStatus.STARTED)
                 .build();
 
+        publisher.publishEvent(new PaymentStatusChangedEvent(this, payment));
         return repository.save(payment);
     }
 
