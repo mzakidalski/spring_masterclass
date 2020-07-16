@@ -1,5 +1,6 @@
 package pl.training.shop.payments;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,12 +24,13 @@ public class PaymentsConfiguration {
     }
 
     @Bean
-    public PaymentRepository paymentRepository(){
+    public PaymentRepository paymentRepository() {
         return new HashMapPaymentRepository();
     }
 
     @Bean(initMethod = "init", destroyMethod = "destroy")
-    public PaymentService fakePaymentService(PaymentIdGenerator paymentIdGenerator,
+    public PaymentService fakePaymentService(@Qualifier("paymentIdGenerator")
+                                                     PaymentIdGenerator paymentIdGenerator,
                                              PaymentRepository paymentRepository) {
         return new FakePaymentService(paymentIdGenerator, paymentRepository);
     }
