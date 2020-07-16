@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Qualifier
 @Component
-@Target({ElementType.TYPE, ElementType.PARAMETER, ElementType.FIELD})
+@Target({ElementType.TYPE, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface IdGenerator {
     String value() default "";

@@ -1,13 +1,13 @@
 package pl.training.shop.payments;
 
 import lombok.extern.java.Log;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Log
-@Repository
 public class HashMapPaymentRepository implements  PaymentRepository {
 
     private final Map<String, Payment> internalMap = new ConcurrentHashMap<>();
