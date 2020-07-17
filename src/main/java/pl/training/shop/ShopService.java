@@ -2,6 +2,7 @@ package pl.training.shop;
 
 import lombok.RequiredArgsConstructor;
 import pl.training.shop.common.PagedResult;
+import pl.training.shop.common.retry.Retry;
 import pl.training.shop.orders.Order;
 import pl.training.shop.orders.OrderService;
 import pl.training.shop.payments.LogPayments;
@@ -26,6 +27,7 @@ public class ShopService {
         return productService.getAll(pagedNumber, pageSize);
     }
 
+    @Retry
     public Order placeOrder(Order order) {
         return orderService.add(order);
     }
