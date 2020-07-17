@@ -18,27 +18,30 @@ public class PaymentConsoleLogger {
 
     private final MessageSource messageSource;
 
-    @Before(value = "@annotation(pl.training.shop.payments.LogPayments) && args(paymentRequest)")
+    @Pointcut("@annotation(pl.training.shop.payments.LogPayments)")
+    public void logPayments() {}
+
+    @Before(value = "logPayments() && args(paymentRequest)")
     public void beforePayment(PaymentRequest paymentRequest) {
         log.info("New payment request: " + paymentRequest);
     }
 
-    @After("@annotation(pl.training.shop.payments.LogPayments)")
+    @After("logPayments()")
     public void afterPayment() {
         log.info("After payment");
     }
 
-    @AfterThrowing(value = "@annotation(pl.training.shop.payments.LogPayments)", throwing = "ex")
+    @AfterThrowing(value = "logPayments()", throwing = "ex")
     public void afterThrowing(Exception ex) {
         log.info("Payment exception: " + ex.getClass().getSimpleName());
     }
 
-    @AfterThrowing(value = "@annotation(pl.training.shop.payments.LogPayments)", throwing = "ex")
+    @AfterThrowing(value = "logPayments()", throwing = "ex")
     public void afterThrowingTwo(RuntimeException ex) {
         log.info("Payment exception:" + ex.getClass().getSimpleName());
     }
 
-    @AfterReturning(value = "@annotation(pl.training.shop.payments.LogPayments)", returning = "payment")
+    @AfterReturning(value = "logPayments()", returning = "payment")
     public void log(Payment payment) {
         log.info(createLogEntry(payment));
     }
