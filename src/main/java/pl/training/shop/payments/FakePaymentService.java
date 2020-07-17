@@ -17,7 +17,7 @@ public class FakePaymentService implements PaymentService {
     private final ApplicationEventPublisher publisher;
 
 
-
+    @LogPayments
     @Override
     public Payment process(PaymentRequest paymentRequest) {
         var payment = Payment.builder()

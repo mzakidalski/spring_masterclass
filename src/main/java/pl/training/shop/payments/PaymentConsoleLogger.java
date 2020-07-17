@@ -2,10 +2,8 @@ package pl.training.shop.payments;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.*;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
@@ -18,6 +16,26 @@ public class PaymentConsoleLogger {
     private static final String MESSAGE_KEY = "paymentInfo";
 
     private final MessageSource messageSource;
+
+    @Before(value = "@annotation(pl.training.shop.payments.LogPayments) && args(paymentRequest)")
+    public void beforePayment(PaymentRequest paymentRequest) {
+        log.info("New payment request: " + paymentRequest);
+    }
+
+    @After("@annotation(pl.training.shop.payments.LogPayments)")
+    public void afterPayment() {
+        log.info("Payment has been finished");
+    }
+
+    @AfterThrowing(value = "@annotation(pl.training.shop.payments.LogPayments)", throwing = "ex")
+    public void afterThrowing(Exception ex) {
+        log.info("Payment exception: " + ex.getClass().getSimpleName());
+    }
+
+    @AfterThrowing(value = "@annotation(pl.training.shop.payments.LogPayments)", throwing = "ex")
+    public void afterThrowingTwo(RuntimeException ex) {
+        log.info("Payment exception:" + ex.getClass().getSimpleName());
+    }
 
     @AfterReturning(value = "@annotation(pl.training.shop.payments.LogPayments)", returning = "payment")
     public void log(Payment payment) {
