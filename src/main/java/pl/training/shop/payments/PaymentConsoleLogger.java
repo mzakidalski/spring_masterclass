@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.aspectj.lang.annotation.*;
 import org.springframework.context.MessageSource;
+import org.springframework.core.annotation.Order;
 
 import java.util.Locale;
-
 
 @Aspect
 @Log
 @RequiredArgsConstructor
+@Order(50)
 public class PaymentConsoleLogger {
 
     private static final String MESSAGE_KEY = "paymentInfo";
@@ -24,7 +25,7 @@ public class PaymentConsoleLogger {
 
     @After("@annotation(pl.training.shop.payments.LogPayments)")
     public void afterPayment() {
-        log.info("Payment has been finished");
+        log.info("After payment");
     }
 
     @AfterThrowing(value = "@annotation(pl.training.shop.payments.LogPayments)", throwing = "ex")

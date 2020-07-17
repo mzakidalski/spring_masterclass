@@ -9,6 +9,7 @@ import pl.training.shop.payments.PaymentService;
 import pl.training.shop.products.Product;
 import pl.training.shop.products.ProductType;
 
+import java.util.Collections;
 import java.util.List;
 
 @Log
@@ -44,4 +45,4 @@ public class Application {
             log.info(payment.toString());
         }
     }
-    }
+}

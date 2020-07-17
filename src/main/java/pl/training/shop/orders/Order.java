@@ -9,6 +9,8 @@ import pl.training.shop.payments.LocalMoney;
 import pl.training.shop.payments.Payment;
 import pl.training.shop.products.Product;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
@@ -18,6 +20,7 @@ public class Order {
 
     private Long id;
     @NonNull
+    @NotEmpty
     private List<Product> products;
     private Payment payment;
 
