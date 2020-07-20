@@ -3,7 +3,6 @@ package pl.training.shop.common.retry;
 import lombok.extern.java.Log;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -15,10 +14,10 @@ import java.util.Arrays;
 @Log
 @Aspect
 @Component
-public class RetryAdvice {
+public class MethodExecutor {
 
     @Around("@annotation(pl.training.shop.common.retry.Retry)")
-    public Object retryOperation(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("retryOperation has been called");
         Throwable lastCaughtException = null;
 
